@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1521733483 source:/home/zach/clientServer/clientServer/client.cpp
+	<unistd.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1521733483 source:/home/zach/clientServer/clientServer/client.c
+	<unistd.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1521909560 source:/home/zach/clientServer/clientServer/server.c
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+

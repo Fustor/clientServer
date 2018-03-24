@@ -1,3 +1,4 @@
+
 // Please note this is a C program
 // It compiles without warnings with gcc
 #include <unistd.h>
@@ -17,7 +18,7 @@ void error(char *msg)
 
 int main(int argc, char *argv[])
 {
-    int sockfd, portno, n;
+    int sockfd, portno, n =2;
 
     struct sockaddr_in serv_addr;
     struct hostent *server;
@@ -36,6 +37,7 @@ int main(int argc, char *argv[])
         fprintf(stderr,"ERROR, no such host\n");
         exit(0);
     }
+    while(n>1) {
     bzero((char *) &serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     bcopy((char *)server->h_addr,
@@ -44,6 +46,8 @@ int main(int argc, char *argv[])
     serv_addr.sin_port = htons(portno);
     if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0)
         error("ERROR connecting");
+
+
     printf("Please enter the message: ");
     bzero(buffer,256);
     fgets(buffer,255,stdin);
@@ -55,6 +59,7 @@ int main(int argc, char *argv[])
     if (n < 0)
          error("ERROR reading from socket");
     printf("%s\n",buffer);
+    }
     return 0;
 }
 

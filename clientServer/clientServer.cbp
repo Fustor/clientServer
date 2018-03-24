@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Salaries.txt" />
+		<Unit filename="client.cpp" />
+		<Unit filename="server.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
