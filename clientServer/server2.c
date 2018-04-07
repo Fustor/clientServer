@@ -20,9 +20,9 @@ void error(char *msg)
     exit(1);
 }
 struct job {
-    char title[100];
-    char avgPay[100];
-    char midPay[100];
+    char title[256];
+    char avgPay[256];
+    char midPay[256];
 
 } ;
 ///////////look up fscanf
@@ -31,22 +31,23 @@ int main()
      struct job jobs[512];
      FILE *file;
      file = fopen("Salaries.txt", "r");
-     char string1[100];
-     char string2[100];
-     char string3[100];
-     for(int i = 0;i<512;i++) {
+
+
         while(!feof(file))
         {
             //printf("scanning \n");
-            fscanf( file, "%[^\t]\t%[^\t]\t%[^\n]\n", jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
-            //printf( "%s\t%s\t%s\n",                    jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
+            for(int i = 0;i<512;i++) {
+                fscanf( file, "%[^\t]\t%[^\t]\t%[^\n]\n", jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
+                //printf( "%s\t%s\t%s\n",                    jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
+            }
+
             //printf("next \n");
        /* jobs[i].title = string1;
         jobs[i].avgPay = string2;
         jobs[i].midPay = string3;
         */
         }
-     }
+
 
 
 
@@ -80,6 +81,24 @@ int main()
           error("ERROR on accept");
      bzero(buffer,256);
      n = read(newsockfd,buffer,255);
+
+
+     for(int i = 0;i<512;i++) {
+       // printf("%s \n", "checking");
+        for(int j = 0;j<256;j++) {
+            if(jobs[i].title[j] == '\0') {
+                printf("%s%s%s \n", jobs[i].title,jobs[i].avgPay, jobs[i].midPay);
+                i = 512;
+                break;
+            }
+            else if(jobs[i].title[j] != buffer[j]) {
+
+                break;
+            }
+        }
+
+     }
+
      if (n < 0) error("ERROR reading from socket");
      printf("%d",n);
      printf("Here is the message: %s\n",buffer);
