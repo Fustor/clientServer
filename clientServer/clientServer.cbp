@@ -32,8 +32,18 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="Salaries.txt" />
-		<Unit filename="client.cpp" />
-		<Unit filename="server.cpp" />
+		<Unit filename="client.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="client2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="server.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="server2.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

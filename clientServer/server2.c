@@ -19,10 +19,41 @@ void error(char *msg)
     perror(msg);
     exit(1);
 }
+struct job {
+    char title[100];
+    char avgPay[100];
+    char midPay[100];
+
+} ;
 ///////////look up fscanf
 int main()
 {
-     printf("Start\n");
+     struct job jobs[512];
+     FILE *file;
+     file = fopen("Salaries.txt", "r");
+     char string1[100];
+     char string2[100];
+     char string3[100];
+     for(int i = 0;i<512;i++) {
+        while(!feof(file))
+        {
+            //printf("scanning \n");
+            fscanf( file, "%[^\t]\t%[^\t]\t%[^\n]\n", jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
+            //printf( "%s\t%s\t%s\n",                    jobs[i].title, jobs[i].avgPay, jobs[i].midPay );
+            //printf("next \n");
+       /* jobs[i].title = string1;
+        jobs[i].avgPay = string2;
+        jobs[i].midPay = string3;
+        */
+        }
+     }
+
+
+
+     printf("Enter server port number: \n");
+     int portNum;
+     scanf("%d",&portNum);
+
      int sockfd, newsockfd, portno, clilen;
      char buffer[256];
      struct sockaddr_in serv_addr, cli_addr;
@@ -32,9 +63,7 @@ int main()
      if (sockfd < 0)
         error("ERROR opening socket");
      bzero((char *) &serv_addr, sizeof(serv_addr));
-     printf("Enter server port number: \n");
-     int portNum;
-     scanf("%d",&portNum);
+
      portno = portNum;
      serv_addr.sin_family = AF_INET;
      serv_addr.sin_addr.s_addr = INADDR_ANY;
@@ -42,8 +71,8 @@ int main()
      if (bind(sockfd, (struct sockaddr *) &serv_addr,
               sizeof(serv_addr)) < 0)
               error("ERROR on binding");
-    while (n>1) {
 
+    while(1) {
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
      newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
@@ -55,8 +84,10 @@ int main()
      printf("%d",n);
      printf("Here is the message: %s\n",buffer);
      n = write(newsockfd,"I got your message",18);
+
      if (n < 0) error("ERROR writing to socket");
      }
+
 
      return 0;
 }
