@@ -29,8 +29,11 @@ struct job {
 int main()
 {
      struct job jobs[512];
+     printf("Enter file containg salary information: \n");
+     char infile[256];
+     scanf("%s",infile);
      FILE *file;
-     file = fopen("Salaries.txt", "r");
+     file = fopen(infile, "r");
 
 
         while(!feof(file))
@@ -88,28 +91,28 @@ int main()
        // printf("%s \n", "checking");
        int len;
        len = strlen(buffer);
-       printf("%d\n", len);
+       //printf("%d\n", len);
         int jobLen;
         jobLen = strlen(jobs[i].title);
-        printf("%d\n", jobLen);
+       // printf("%d\n", jobLen);
 
 
-        printf("%s\n",buffer);
-        printf("%s\n",jobs[i].title);
+        //printf("%s\n",buffer);
+        //printf("%s\n",jobs[i].title);
         if(strncmp(buffer, jobs[i].title,len-1) == 0 && len == (jobLen+1)) {
 
 
 
                     //if(j == len-1) {
-                        printf("%s\n","preprint");
-                        printf("%s\n",buffer);
-                        printf("%s%s%s \n", jobs[i].title,jobs[i].avgPay, jobs[i].midPay);
+                        //printf("%s\n","preprint");
+                       // printf("%s\n",buffer);
+                        //printf("%s%s%s \n", jobs[i].title,jobs[i].avgPay, jobs[i].midPay);
                         char temp[512];
                         temp[0] = '\0';
                         strcat(temp, jobs[i].avgPay);
                         strcat(temp, jobs[i].midPay);
                         n = write(newsockfd,temp, 512);
-                        printf("%s\n", "Wrotted");
+                        //printf("%s\n", "Wrotted");
                         written = 1;
                         i = 513;
                         break;
@@ -144,7 +147,7 @@ int main()
 
      }
 
-     printf("%s%d\n","written ",written);
+     //printf("%s%d\n","written ",written);
       if(written == 0) {
         char temp2[512];
         temp2[0] = '\0';
@@ -153,8 +156,8 @@ int main()
      }
 
      if (n < 0) error("ERROR reading from socket");
-     printf("%d",n);
-     printf("Here is the message: %s\n",buffer);
+     //printf("%d",n);
+     //printf("Here is the message: %s\n",buffer);
      //n = write(newsockfd,"I got your message",18);
 
      if (n < 0) error("ERROR writing to socket");

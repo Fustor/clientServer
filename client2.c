@@ -18,12 +18,14 @@ void error(char *msg)
 
 int main()
 {
-    printf("Enter port number: \n");
-    int portNum;
-    scanf("%d",&portNum);
     printf("Enter host name: \n");
     char hostName[100];
     scanf("%s",hostName);
+    printf("Enter port number: \n");
+    int portNum;
+    scanf("%d",&portNum);
+
+
 
     int sockfd, portno, n =2;
     portno = portNum;
@@ -56,34 +58,40 @@ int main()
     int c;
     while((c = getchar()) != '\n' && c != EOF);//clears input stream, without fgets takes in \n
 
-    printf("Please enter the message: ");
+    printf("Enter a college major: ");
     bzero(buffer,512);
     fgets(buffer,511,stdin);
 
     int checkEmpty = 0;
     for(int i = 0;i<512;i++) {
         if(buffer[i] != ' ' && buffer[i] != '\n' && buffer[i] != '\t'&& buffer[i] != '\0') {
-            printf("%s%c\n", "not empty", buffer[i]);
+            //printf("%s%c\n", "not empty", buffer[i]);
             checkEmpty = 1;
             break;
         }
     }
     if(checkEmpty == 0) {
-        printf("%s\n", "empty");
+        //printf("%s\n", "empty");
         break;
     }
-
+    char career[512];
+    strcpy(career,buffer);
     n = write(sockfd,buffer,strlen(buffer));
     if (n < 0)
          error("ERROR writing to socket");
     bzero(buffer,512);
     n = read(sockfd,buffer,511);
+    char *split;
+    split = strtok(buffer, " ");
+    printf("%s%s%s%s\n", "The average early career pay for a ", career, "major is $", split);
+    split = strtok(NULL," ");
+    printf("%s%s\n", "The corresponding mid career pay is $", split);
     //printf("%s\n",buffer);
 
 
     if (n < 0)
          error("ERROR reading from socket");
-    printf("%s\n",buffer);
+    //printf("%s\n",buffer);
     }
 
     return 0;
